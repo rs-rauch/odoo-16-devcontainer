@@ -1,0 +1,1 @@
+# From https://github.com/odoo/odoo/blob/16.0/requirements.txt
