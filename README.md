@@ -1,3 +1,23 @@
+# Project 
+
+Configuration file: [config/odoo.conf](config/odoo.conf)
+
+```
+project
+└───addons              /// Place for your custom addons
+│   │   README.md
+└───enterprise          /// Place for enterprise addons
+│   │   README.md
+└───config
+│   │   odoo.conf       /// Config for odoo
+│   .env                /// Enviromnet variables (for Odoo, Postgress, etc.)
+│   .gitignore
+│   docker-compose.yml
+│   project-start.sh
+│   README.md
+```
+
+
 # Run
 
 ```bash
