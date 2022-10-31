@@ -1,19 +1,48 @@
 version: '3.1'
+
+volumes:
+  odoo-web-data:
+  odoo-db-data:
+
 services:
+  db:
+    # container_name: odoo-db-container
+    image: postgres:13
+    build:
+      context: .
+    env_file: .env
+    environment:
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+    #   - PGDATA=/var/lib/postgresql/data/pgdata
+    # volumes:
+    #   - odoo-db-data:/var/lib/postgresql/data/pgdata
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${DATABASE_NAME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   web:
-    image: odoo:16.0
+    image: odoo:15.0
+    build:
+      context: .
     # container_name: odoo-web-container
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     ports:
       - "8069:8069"
-    volumes:
-      - ./addons:/mnt/extra-addons
-
-  db:
-    image: postgres:13
-    # container_name: odoo-db-container
+    env_file: .env
     environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_PASSWORD=odoo
-      - POSTGRES_USER=odoo
+      - HOST
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+    volumes: 
+      - ./config:/etc/odoo
+      # - Using configuration file at /etc/odoo/odoo.conf
+      - ./addons:/mnt/extra-addons
+      # - ./enterprise:/mnt/extra-addons
+      - ./enterprise:/mnt/enterprise
+    command: sh -c "odoo -d odoo-test-db -r ${POSTGRES_USER} -w ${POSTGRES_PASSWORD} --db_host=db --db_port=5432 --log-level=debug"
