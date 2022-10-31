@@ -24,8 +24,6 @@ project
 bash project-start.sh
 ```
 
-# Use
-
 Go to [localhost:8069/web/login](http://localhost:8069/web/login)
 
 
@@ -44,3 +42,14 @@ admin
 # Odoo database manager
 
 To see all your databases or to create a new one go to [localhost:8069/web/database/manager](http://localhost:8069/web/database/manager).
+
+
+# Development
+
+Folder contains a Dev Container configuration file. 
+
+Install [```ms-vscode-remote.remote-containers```](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension.
+
+Reopen folder to develop in a container ([learn more](https://aka.ms/vscode-remote/docker)).
+
+
