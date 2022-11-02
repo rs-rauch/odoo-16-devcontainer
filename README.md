@@ -5,14 +5,16 @@ Configuration file: [config/odoo.conf](config/odoo.conf)
 ```
 project
 └───addons              /// Place for your custom addons
-│   │   README.md
+│   │   .addons
 └───enterprise          /// Place for enterprise addons
-│   │   README.md
+│   │   .enterprise
 └───config
 │   │   odoo.conf       /// Config for odoo
 │   .env                /// Enviromnet variables (for Odoo, Postgress, etc.)
 │   .gitignore
 │   docker-compose.yml
+│   odoo-init.sh        /// Setup odoo script 
+│   odoo.Dockerfile     /// Dockerfile for odoo service
 │   project-start.sh
 │   README.md
 ```
@@ -53,3 +55,15 @@ Install [```ms-vscode-remote.remote-containers```](https://marketplace.visualstu
 Reopen folder to develop in a container ([learn more](https://aka.ms/vscode-remote/docker)).
 
 
+# Tools
+
+Get the [Odoo Debug Extension](https://github.com/droggol/OdooDebug) for [Chrome](https://chrome.google.com/webstore/detail/odoo-debug/hmdmhilocobgohohpdpolmibjklfgkbi) or [Firefox](https://addons.mozilla.org/en-US/firefox/addon/odoo-debug/).
+
+
+# Odoo CLI
+
+Connect to odoo container:
+
+```bash
+docker exec -it web /bin/bash
+```
