@@ -8,8 +8,6 @@ services:
   db:
     # container_name: odoo-db-container
     image: postgres:13
-    build:
-      context: .
     env_file: .env
     environment:
       - POSTGRES_DB
@@ -25,9 +23,7 @@ services:
       retries: 5
 
   web:
-    image: odoo:15.0
-    build:
-      context: .
+    image: "odoo:${ODOO_VERSION}"
     # container_name: odoo-web-container
     depends_on:
       db:
@@ -41,8 +37,6 @@ services:
       - POSTGRES_PASSWORD
     volumes: 
       - ./config:/etc/odoo
-      # - Using configuration file at /etc/odoo/odoo.conf
       - ./addons:/mnt/extra-addons
-      # - ./enterprise:/mnt/extra-addons
       - ./enterprise:/mnt/enterprise
     command: sh -c "odoo -d odoo-test-db -r ${POSTGRES_USER} -w ${POSTGRES_PASSWORD} --db_host=db --db_port=5432 --log-level=debug"
