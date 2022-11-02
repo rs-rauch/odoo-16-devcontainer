@@ -13,9 +13,9 @@ services:
       - POSTGRES_DB
       - POSTGRES_USER
       - POSTGRES_PASSWORD
-    #   - PGDATA=/var/lib/postgresql/data/pgdata
-    # volumes:
-    #   - odoo-db-data:/var/lib/postgresql/data/pgdata
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data/pgdata
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${DATABASE_NAME}"]
       interval: 5s
@@ -23,7 +23,18 @@ services:
       retries: 5
 
   web:
-    image: "odoo:${ODOO_VERSION}"
+    # image: "odoo:${ODOO_VERSION}"
+    build:
+      context: .
+      dockerfile: odoo.Dockerfile
+      args:
+        ODOO_VERSION: ${ODOO_VERSION}
+        HOST: ${HOST}
+        PORT: ${PORT}
+        POSTGRES_USER: ${POSTGRES_USER}
+        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+        DATABASE_NAME: ${DATABASE_NAME}
+
     # container_name: odoo-web-container
     depends_on:
       db:
@@ -33,10 +44,15 @@ services:
     env_file: .env
     environment:
       - HOST
+      - PORT
       - POSTGRES_USER
       - POSTGRES_PASSWORD
     volumes: 
       - ./config:/etc/odoo
       - ./addons:/mnt/extra-addons
       - ./enterprise:/mnt/enterprise
-    command: sh -c "odoo -d odoo-test-db -r ${POSTGRES_USER} -w ${POSTGRES_PASSWORD} --db_host=db --db_port=5432 --log-level=debug"
+      - ./odoo-init.sh:/odoo-init.sh
+    # entrypoint: sh -c "/odoo-init.sh"
+    command: ["/bin/sh", "/odoo-init.sh"]
+
+    # command: sh -c "pip install watchdog && odoo -d $${DATABASE_NAME} -r ${POSTGRES_USER} -w ${POSTGRES_PASSWORD} --db_host=db --db_port=5432 --log-level=debug --dev=all"

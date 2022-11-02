@@ -1,2 +1,5 @@
 addons/*
+!addons/.addons
+
 enterprise/*
+!enterprise/.enterprise
