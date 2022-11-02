@@ -1,5 +1,7 @@
 addons/*
+addons/.gitignore
 !addons/.addons
 
 enterprise/*
+enterprise/.gitignore
 !enterprise/.enterprise
