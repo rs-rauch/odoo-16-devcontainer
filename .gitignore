@@ -5,3 +5,5 @@ addons/.gitignore
 enterprise/*
 enterprise/.gitignore
 !enterprise/.enterprise
+
+.idea

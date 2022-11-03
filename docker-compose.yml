@@ -52,7 +52,4 @@ services:
       - ./addons:/mnt/extra-addons
       - ./enterprise:/mnt/enterprise
       - ./odoo-init.sh:/odoo-init.sh
-    # entrypoint: sh -c "/odoo-init.sh"
     command: ["/bin/sh", "/odoo-init.sh"]
-
-    # command: sh -c "pip install watchdog && odoo -d $${DATABASE_NAME} -r ${POSTGRES_USER} -w ${POSTGRES_PASSWORD} --db_host=db --db_port=5432 --log-level=debug --dev=all"
