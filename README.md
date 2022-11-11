@@ -6,10 +6,10 @@ Configuration file: [config/odoo.conf](config/odoo.conf)
 project
 └───addons              /// Place for your custom addons
 │   │   .addons
-└───enterprise          /// Place for enterprise addons
-│   │   .enterprise
 └───config
 │   │   odoo.conf       /// Config for odoo
+└───enterprise          /// Place for enterprise addons
+│   │   .enterprise
 │   .env                /// Enviromnet variables (for Odoo, Postgress, etc.)
 │   .gitignore
 │   docker-compose.yml
@@ -67,3 +67,12 @@ Connect to odoo container:
 ```bash
 docker exec -it web /bin/bash
 ```
+
+# FAQ
+
+## Error: ```$ /odoo-init.sh: 2: set: Illegal option - ```
+The odoo-init.sh script will setup everything inside the odoo container. That container is based on a Linux which uses different escaping characters for linebreaks, than Windows.
+
+- Make sure the control characters are set to ```LF```. On Windows it is set to be ```CR LF```. In VS Code there is a button in the bottom right, next to the UTF-8 encoding.
+
+```CR = Carriage Return and LF = Line Feed```
