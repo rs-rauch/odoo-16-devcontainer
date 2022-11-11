@@ -6,7 +6,6 @@ echo "Setting up odoo"
 echo "################"
 
 
-
 if [ -z "$(ls -A $ADDONS_DIRECTORY)" ]; then
     echo "################"
     echo "Installing custom addons"
@@ -17,7 +16,7 @@ if [ -z "$(ls -A $ADDONS_DIRECTORY)" ]; then
     # comma-separated list of folder names in /mnt/extra-addons
     CUSTOM_ADDONS=`ls -dm $ADDONS_DIRECTORY/* | tr -d ' ' | sed 's/\/mnt\/extra-addons\///g'`
     echo "Installing custom addons: $CUSTOM_ADDONS"
-    odoo -d ${DATABASE_NAME} \
+    odoo # -d ${DATABASE_NAME} \ USE THIS IF YOU WANT TO USE A SPECIFIC DATABASE
         -r ${POSTGRES_USER} \
         -w ${POSTGRES_PASSWORD} \
         --db_host=${HOST} \
@@ -31,7 +30,7 @@ else
     echo "################"
     echo "No addons"
     echo "################"
-    odoo -d ${DATABASE_NAME} \
+    odoo # -d ${DATABASE_NAME} \
         -r ${POSTGRES_USER} \
         -w ${POSTGRES_PASSWORD} \
         --db_host=${HOST} \
