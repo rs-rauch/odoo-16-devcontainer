@@ -88,7 +88,7 @@ To delete the volume run the following command.
 docker volume rm VOLUME 
 ```
 Replace ```VOLUME``` with the volume name.
-If the volume somehow is still in use, you can delete the database image ````docker image rm IMAGE``` add ```--force``` to the command.
+If the volume somehow is still in use, you can delete the database image ```docker image rm IMAGE``` add ```--force``` to the command.
 
 # Tools
 
