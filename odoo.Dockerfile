@@ -20,5 +20,3 @@ ARG DATABASE_NAME
 ENV DATABASE_NAME=${DATABASE_NAME}
 
 RUN pip install watchdog
-
-
