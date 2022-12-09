@@ -57,4 +57,33 @@
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode",
 	// 
+	"settings": {
+		"editor.formatOnPaste": false,
+		"editor.formatOnSave": true,
+		/*
+		 * Don't use the value "modificationsIfAvailable" for now, because there is a bug in the extension prettier that
+		 * causes the prettier to add unnecessary semicolons, see https://github.com/prettier/prettier/issues/12964
+		 */
+		"editor.formatOnSaveMode": "file",
+		"editor.codeActionsOnSave": {
+			//These settings shouldn't be enabled. It will cause all auto fixes to be applied automatically. The developer
+			//should have the option to decide which auto fix to apply. This option is also very slow and causes every
+			//save action to take up to one minute for one file.
+			"source.fixAll": false,
+			"source.organizeImports": true
+		},
+		"files.autoSave": "off"
+	},
+	"extensions": [
+		"ms-vscode-remote.remote-containers",
+		"ms-python.python",
+		"ms-python.vscode-pylance",
+		"ms-python.isort",
+		//Path Intellisense
+		"christian-kohler.path-intellisense",
+		//Git
+		"mhutchie.git-graph",
+		"letmaik.git-tree-compare",
+		"esbenp.prettier-vscode",
+	]
 }

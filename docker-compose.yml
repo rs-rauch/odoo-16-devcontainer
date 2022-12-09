@@ -53,3 +53,5 @@ services:
       - ./enterprise:/mnt/enterprise
       - ./odoo-init.sh:/odoo-init.sh
     command: ["/bin/sh", "/odoo-init.sh"]
+    stdin_open: true
+    tty: true
