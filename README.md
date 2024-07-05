@@ -1,3 +1,6 @@
+# Archived
+we're no longer maintaining this repo.
+
 # Project 
 
 Configuration file: [config/odoo.conf](config/odoo.conf)
